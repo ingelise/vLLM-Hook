@@ -3,17 +3,23 @@ from .vllm_hook_plugins import (
     HookLLM,
     ProbeHookQKWorker,
     SteerHookActWorker,
+    ProbeHiddenStatesWorker,
     AttntrackerAnalyzer,
     CorerAnalyzer,
+    HiddenStatesAnalyzer,
     register_plugins,
+    get_model_config
 )
 
 __all__ = [
     "PluginRegistry",
     "HookLLM",
-    "ProbeHookQKWorker", 
+    "ProbeHookQKWorker",
     "SteerHookActWorker",
+    "ProbeHiddenStatesWorker",
     "AttntrackerAnalyzer",
     "CorerAnalyzer",
-    "register_plugins"
+    "HiddenStatesAnalyzer",
+    "register_plugins",
+    "get_model_config",
 ]

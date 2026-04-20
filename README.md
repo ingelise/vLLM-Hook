@@ -28,25 +28,33 @@ This includes dynamic analysis of:
 ---
 
 ## 📦 Installation
-### 1. Clone the repository
+
+### From PyPI (recommended for users)
+
+```bash
+pip install vllm-hook-plugins
+```
+
+### From source (for developers)
+
+#### 1. Clone the repository
 
 ```bash
 git clone https://github.com/IBM/vLLM-Hook.git
-cd vLLm.hook
+cd vLLM-Hook
 ```
 
-### 2. (Optional) Create an environment 
+#### 2. (Optional) Create an environment 
 
 ```bash
 conda create -n vllm_hook_env
 conda activate vllm_hook_env
 ```
 
-### 3. Install the plugin and dependencies
+#### 3. Install in editable mode
 
 ```bash
-pip install -r requirement.txt
-pip install -e vllm_hook_plugins
+pip install -e .
 ```
 
 ---

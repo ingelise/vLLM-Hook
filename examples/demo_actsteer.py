@@ -6,14 +6,15 @@ mp.set_start_method("spawn", force=True)
 os.environ["VLLM_USE_V1"] = "1"
 os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
-from vllm_hook_plugins import HookLLM
+from vllm_hook_plugins import HookLLM, get_model_config
+
 from vllm import SamplingParams
 
 if __name__ == "__main__":
 
     cache_dir = "./cache/"
     model = 'microsoft/Phi-3-mini-4k-instruct'
-    
+
     dtype_map = {
         'microsoft/Phi-3-mini-4k-instruct': 'auto',
         'mistralai/Mistral-7B-Instruct-v0.3': torch.float16,
@@ -21,10 +22,13 @@ if __name__ == "__main__":
         'Qwen/Qwen2-1.5B-Instruct': torch.float
     }
 
+    # Get the bundled config from the installed package
+    config_path = get_model_config('activation_steer', model)
+
     llm = HookLLM(
         model=model,
         worker_name="steer_hook_act",
-        config_file=f'model_configs/activation_steer/{model.split("/")[-1]}.json',
+        config_file=config_path,
         download_dir=cache_dir,
         gpu_memory_utilization=0.7,
         max_model_len=2048,
