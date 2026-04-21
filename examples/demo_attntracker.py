@@ -7,7 +7,7 @@ mp.set_start_method("spawn", force=True)
 os.environ["VLLM_USE_V1"] = "1"
 os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
-from vllm_hook_plugins import HookLLM
+from vllm_hook_plugins import HookLLM, get_model_config
 
 def apply_chat_template_and_get_ranges(tokenizer, model_name: str, instruction: str, data: str):
     """Following https://github.com/khhung-906/Attention-Tracker/blob/main/models/attn_model.py"""
@@ -43,6 +43,9 @@ if __name__ == "__main__":
     cache_dir = "./cache/"
     model = 'ibm-granite/granite-3.1-8b-instruct'  # 'Qwen/Qwen2-1.5B-Instruct' # 'mistralai/Mistral-7B-Instruct-v0.3' # 
     
+    # Get the bundled config from the installed package
+    config_path = get_model_config('attention_tracker', model)
+
     dtype_map = {
         'mistralai/Mistral-7B-Instruct-v0.3': torch.float16,
         'ibm-granite/granite-3.1-8b-instruct': torch.float16,
@@ -53,7 +56,7 @@ if __name__ == "__main__":
         model=model,
         worker_name="probe_hook_qk",
         analyzer_name="attn_tracker",
-        config_file=f'model_configs/attention_tracker/{model.split("/")[-1]}.json',
+        config_file=config_path,
         download_dir=cache_dir,
         gpu_memory_utilization=0.7,
         max_model_len=2048,

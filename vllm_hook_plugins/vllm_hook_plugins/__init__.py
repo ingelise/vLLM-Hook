@@ -15,8 +15,10 @@ def get_model_config(config_type: str, model_name: str) -> str:
     """Get path to a model config file. A convenience function to use included model configurations.
 
     Args:
-        config_type: Type of config (e.g., 'activation_steer')
-        model_name: Model name or path
+        config_type: str
+            Type of config (e.g., 'activation_steer')
+        model_name: str
+            Model name or path
 
     Returns:
         Absolute path to the model config JSON file

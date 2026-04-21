@@ -12,12 +12,12 @@ class HookLLM:
     def __init__(
         self,
         model: str,
-        worker_name: str = None,
-        analyzer_name: str = None,
-        config_file: str = None,
+        worker_name: Optional[str] = None,
+        analyzer_name: Optional[str] = None,
+        config_file: Optional[str] = None,
         download_dir: str = '~/.cache',
         enable_hook: bool = True,
-        hook_dir: str = None,
+        hook_dir: Optional[str] = None,
         enforce_eager: bool = True,
         **vllm_kwargs
     ):
