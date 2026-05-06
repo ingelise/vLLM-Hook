@@ -122,6 +122,18 @@ model_configs/<example_name>/<model_name>.json
 ```
 For example `model_configs/attention_tracker/granite-3.1-8b-instruct.json`.
 
+
+### Note: Bring your own config
+#### Option 1: Direct parameter
+
+```
+  config = get_model_config('hidden_states', 'my-model', config_dir='/home/user/my_configs')
+```                                                                                                                                                                             
+#### Option 2: Environment variable     
+```                                                                                                                                      
+  os.environ['VLLM_HOOK_CONFIG_DIR'] = '/home/user/my_configs'
+  config = get_model_config('hidden_states', 'my-model')      
+```
 ---
 
 ## 🏠 Plugin Architecture
