@@ -9,6 +9,7 @@ os.environ.setdefault("VLLM_HOOK_USE_SAFETENSORS", "1")
 os.environ.setdefault("VLLM_HOOK_ASYNC_SAVE", "1")
 
 from vllm_hook_plugins import HookLLM, get_model_config
+from vllm import SamplingParams
 
 if __name__ == "__main__":
 
@@ -42,7 +43,7 @@ if __name__ == "__main__":
 
     print("=" * 50)
     for case in test_cases:
-        output = llm.generate(case, temperature=0.0, max_tokens=10)
+        output = llm.generate(case, SamplingParams(temperature=0.0, max_tokens=10), save_to_disk=True)
         stats = llm.analyze(analyzer_spec={"reduce": "none"})
 
         print(f"\nPrompt: '{case}'")
@@ -55,7 +56,7 @@ if __name__ == "__main__":
 
     print("=" * 50)
     print("Batch processing examples...")
-    output = llm.generate(test_cases, temperature=0.0, max_tokens=10)
+    output = llm.generate(test_cases, SamplingParams(temperature=0.0, max_tokens=10), save_to_disk=True)
     stats = llm.analyze(analyzer_spec={"reduce": "norm"})
 
     for i, prompt in enumerate(test_cases):
